@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "JetSetGo.app"
-               BlueprintName = "JetSetGo"
-               ReferencedContainer = "container:JetSetGo.xcodeproj">
+               BuildableName = "JetSetGO.app"
+               BlueprintName = "JetSetGO"
+               ReferencedContainer = "container:JetSetGO.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "JetSetGoTests.xctest"
-               BlueprintName = "JetSetGoTests"
-               ReferencedContainer = "container:JetSetGo.xcodeproj">
+               BuildableName = "JetSetGOTests.xctest"
+               BlueprintName = "JetSetGOTests"
+               ReferencedContainer = "container:JetSetGO.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "JetSetGo.app"
-            BlueprintName = "JetSetGo"
-            ReferencedContainer = "container:JetSetGo.xcodeproj">
+            BuildableName = "JetSetGO.app"
+            BlueprintName = "JetSetGO"
+            ReferencedContainer = "container:JetSetGO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "JetSetGo.app"
-            BlueprintName = "JetSetGo"
-            ReferencedContainer = "container:JetSetGo.xcodeproj">
+            BuildableName = "JetSetGO.app"
+            BlueprintName = "JetSetGO"
+            ReferencedContainer = "container:JetSetGO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
