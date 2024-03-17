@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'reac
 import Colors from '../colors';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const TextInputFlight = ({ text }) => <TextInput
+const TextInputFlight = ({ text, arg, val }) => <TextInput
     style={{
         width: '48%',
         height: 50,
@@ -12,9 +12,9 @@ const TextInputFlight = ({ text }) => <TextInput
         alignSelf: 'center',
         borderRadius: 10,
         backgroundColor: Colors.textBackgroundColor
-
     }}
-
+    onChangeText={arg}
+    value={val}
     placeholder={text}
 />
 const OneWayOrRoundTrip = ({ text, active, onpress }) => <Text style={{
@@ -29,22 +29,38 @@ const OneWayOrRoundTrip = ({ text, active, onpress }) => <Text style={{
     {text}
 </Text>
 const SearchBar = () => {
+
+    const [From, setFrom] = useState('')
+    const [To, setTo] = useState('')
+    const [TravellersCount, setTravellersCount] = useState(1)
     const [OneWayOrRoundTripState, setOneWayOrRoundTripState] = useState(false)
+    const [isDatePickerVisibleTrip, setDatePickerVisibilityTrip] = useState(false);
+    const [isDatePickerVisibleReturnTrip, setDatePickerVisibilityReturnTrip] = useState(false);
+    const [tripDate, settripDate] = useState(null);
+    const [returnTripDate, setreturnTripDate] = useState(null);
 
-
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const showDatePicker = () => {
-        setDatePickerVisibility(true);
+        setDatePickerVisibilityTrip(true);
+    };
+    const showDatePickerReturnTrip = () => {
+        setDatePickerVisibilityReturnTrip(true);
     };
 
     const hideDatePicker = () => {
-        setDatePickerVisibility(false);
+        setDatePickerVisibilityTrip(false);
+    };
+    const hideDatePickerReturnTrip = () => {
+        setDatePickerVisibilityReturnTrip(false);
     };
 
-    const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+    const handleConfirmTrip = (date) => {
+        settripDate(date)
         hideDatePicker();
+    };
+    const handleConfirmReturnTrip = (date) => {
+        setreturnTripDate(date)
+        hideDatePickerReturnTrip();
     };
 
 
@@ -72,28 +88,68 @@ const SearchBar = () => {
             </View>
             <View style={styles.textinputStyle}>
 
-                <TextInputFlight text={'From'} />
-                <TextInputFlight text={'To'} />
+                <TextInputFlight text={'From'} arg={setFrom} val={From} />
+                <TextInputFlight text={'To'} arg={setTo} val={To} />
 
             </View>
             <DateTimePickerModal
-                isVisible={isDatePickerVisible}
+                isVisible={isDatePickerVisibleTrip}
                 mode="date"
-                onConfirm={handleConfirm}
+                onConfirm={handleConfirmTrip}
                 onCancel={hideDatePicker}
+                minimumDate={new Date()}
+
+            />
+            <DateTimePickerModal
+                isVisible={isDatePickerVisibleReturnTrip}
+                mode="date"
+                onConfirm={handleConfirmReturnTrip}
+                onCancel={hideDatePicker}
+                minimumDate={new Date()}
+
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '90%', margin: 10, }}>
-                <Text onPress={showDatePicker}>Select Date</Text>
+                <Text onPress={showDatePicker}>{tripDate == null ? 'Select Date' : tripDate.toLocaleDateString("en-GB", {
+                    day: "long",
+                    year: "long",
+                    month: "long",
+                })}</Text>
 
                 {OneWayOrRoundTripState ?
                     <Text style={{ color: Colors.blue, fontWeight: '800' }} onPress={() => setOneWayOrRoundTripState(false)}>Add trip +</Text> :
-                    <Text>Select Date</Text>}
+                    <Text onPress={showDatePickerReturnTrip}>{returnTripDate == null ? 'Select Return Date' : returnTripDate.toLocaleDateString("en-GB", {
+                        day: "long",
+                        year: "long",
+                        month: "long",
+                    })}</Text>}
+            </View>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '90%', margin: 10, }}>
+                <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.textColorBlack, padding: 10 }}
+                    onPress={() => setTravellersCount(val => val <= 1 ? val : val - 1)}
+                >-</Text>
+                {/* TravellersCount */}
+                <Text style={{
+                    width: '48%',
+                    height: 50,
+                    color: Colors.textColorBlack,
+                    padding: 13,
+                    alignSelf: 'center',
+                    borderRadius: 10,
+                    backgroundColor: Colors.textBackgroundColor,
+                    textAlign: 'center'
+                }}>{TravellersCount}</Text>
+                <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.textColorBlack, padding: 10 }}
+                    onPress={() => setTravellersCount(val => val >= 6 ? val : val + 1)}
+                >+</Text>
+
             </View>
 
 
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={{ color: Colors.textColorWhite, fontSize: 18, fontWeight: 'bold', }} >
+
+            <TouchableOpacity style={styles.button} onPress={() => console.log(From, To, 'this is from and to')}>
+                <Text style={{ color: Colors.textColorWhite, fontSize: 18, fontWeight: 'bold', }}>
                     Search
                 </Text>
             </TouchableOpacity>
