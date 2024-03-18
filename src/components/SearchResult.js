@@ -3,11 +3,21 @@ import { View, StyleSheet, Text, FlatList, TouchableOpacity, Modal, Pressable, A
 import Colors from '../colors';
 import SearchResultCard from './SearchResultCard';
 
-
+const NoDataAvailable = () => <Text style={{ width: '90%', height: '100%', textAlign: 'center', alignSelf: 'center', fontSize: 21, color: Colors.textColorBlack }}>There are no Flights available on this day either you can try changing the date or to see all available flights you can remove filter</Text>
 const SearchResult = ({ route }) => {
+    let filter = {
+        origin: route.params.From,
+        destination: route.params.To
+    };
     const [modalVisibleSort, setModalVisibleSort] = useState(false);
     const [modalVisibleFilter, setModalVisibleFilter] = useState(false);
-    const [flights, setFlights] = useState(route.params.flightData)
+    const [flights, setFlights] = useState(route.params.flightData.filter(obj => obj.origin == filter.origin && obj.destination == filter.destination
+        && (new Date(obj.departureTime).getDate() === new Date(route.params.departureDate).getDate()
+            && new Date(obj.departureTime).getMonth() === new Date(route.params.departureDate).getMonth()
+            && new Date(obj.departureTime).getFullYear() === new Date(route.params.departureDate).getFullYear())
+    )
+    )
+
     const [From, setFrom] = useState(route.params.From)
     const [To, setTo] = useState(route.params.To)
     const [isRoundTrip, setisRoundTrip] = useState(route.params.isRoundTrip)
@@ -117,12 +127,12 @@ const SearchResult = ({ route }) => {
             {/* <Text>list of search result will appear</Text>
             <Text>{From}</Text>
             <Text>{To}</Text> */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '30%' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '50%', height: 30, alignItems: 'center', }}>
 
-                <TouchableOpacity onPress={() => setModalVisibleFilter(!modalVisibleFilter)}>
-                    <Text>Filters</Text>
+                <TouchableOpacity style={styles.filter} onPress={() => setModalVisibleFilter(!modalVisibleFilter)}>
+                    <Text >Filters</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setModalVisibleSort(!modalVisibleSort)}>
+                <TouchableOpacity style={styles.filter} onPress={() => setModalVisibleSort(!modalVisibleSort)}>
                     <Text>Sort</Text>
                 </TouchableOpacity>
             </View>
@@ -131,6 +141,8 @@ const SearchResult = ({ route }) => {
                 data={flights}
                 renderItem={({ item }) => <SearchResultCard flight={item} />}
                 keyExtractor={item => item.id}
+                ListEmptyComponent={NoDataAvailable}
+
             />
 
 
@@ -139,7 +151,7 @@ const SearchResult = ({ route }) => {
 }
 
 const styles = StyleSheet.create({
-    tripDetails: { color: Colors.textColorBlack },
+    tripDetails: { color: Colors.textColorBlack, margin: 10, },
     item: {
         backgroundColor: Colors.textColorWhite,
         padding: 20,
@@ -198,6 +210,7 @@ const styles = StyleSheet.create({
         color: Colors.textColorBlack,
 
     },
+    filter: { borderWidth: .1, borderRadius: 3, width: 90, alignItems: 'center', color: Colors.textColorWhite }
 })
 
 export default SearchResult;

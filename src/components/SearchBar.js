@@ -96,7 +96,7 @@ const SearchBar = ({ route, flightData }) => {
                 mode="date"
                 onConfirm={handleConfirmTrip}
                 onCancel={hideDatePicker}
-                minimumDate={new Date()}
+            // minimumDate={new Date()}
 
             />
             <DateTimePickerModal
@@ -115,10 +115,11 @@ const SearchBar = ({ route, flightData }) => {
                     <Text onPress={showDatePickerReturnTrip}>{returnTripDate == null ? 'Select Return Date' : returnTripDate.toLocaleDateString("en-GB")}</Text>}
             </View>
 
+            <Text style={{ fontSize: 16, fontWeight: '400', color: Colors.textColorBlack, }}>Select Travellers</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '90%', margin: 10, }}>
                 <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.textColorBlack, padding: 10 }}
                     onPress={() => setTravellersCount(val => val <= 1 ? val : val - 1)}
-                >-</Text>
+                > - </Text>
                 {/* TravellersCount */}
                 <Text style={{
                     width: '48%',
@@ -129,10 +130,10 @@ const SearchBar = ({ route, flightData }) => {
                     borderRadius: 10,
                     backgroundColor: Colors.textBackgroundColor,
                     textAlign: 'center'
-                }}>{TravellersCount}</Text>
+                }}>{TravellersCount} Adult</Text>
                 <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.textColorBlack, padding: 10 }}
                     onPress={() => setTravellersCount(val => val >= 6 ? val : val + 1)}
-                >+</Text>
+                > + </Text>
 
             </View>
 
