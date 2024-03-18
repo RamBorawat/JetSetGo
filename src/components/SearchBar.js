@@ -28,12 +28,11 @@ const OneWayOrRoundTrip = ({ text, active, onpress }) => <Text style={{
     onPress={() => onpress()}>
     {text}
 </Text>
-const SearchBar = () => {
-
+const SearchBar = ({ route, flightData }) => {
     const [From, setFrom] = useState('')
     const [To, setTo] = useState('')
     const [TravellersCount, setTravellersCount] = useState(1)
-    const [OneWayOrRoundTripState, setOneWayOrRoundTripState] = useState(false)
+    const [OneWayOrRoundTripState, setOneWayOrRoundTripState] = useState(true)
     const [isDatePickerVisibleTrip, setDatePickerVisibilityTrip] = useState(false);
     const [isDatePickerVisibleReturnTrip, setDatePickerVisibilityReturnTrip] = useState(false);
     const [tripDate, settripDate] = useState(null);
@@ -105,23 +104,15 @@ const SearchBar = () => {
                 mode="date"
                 onConfirm={handleConfirmReturnTrip}
                 onCancel={hideDatePicker}
-                minimumDate={new Date()}
+                minimumDate={tripDate}
 
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '90%', margin: 10, }}>
-                <Text onPress={showDatePicker}>{tripDate == null ? 'Select Date' : tripDate.toLocaleDateString("en-GB", {
-                    day: "long",
-                    year: "long",
-                    month: "long",
-                })}</Text>
+                <Text onPress={showDatePicker}>{tripDate == null ? 'Select Date' : tripDate.toLocaleDateString("en-GB")}</Text>
 
                 {OneWayOrRoundTripState ?
                     <Text style={{ color: Colors.blue, fontWeight: '800' }} onPress={() => setOneWayOrRoundTripState(false)}>Add trip +</Text> :
-                    <Text onPress={showDatePickerReturnTrip}>{returnTripDate == null ? 'Select Return Date' : returnTripDate.toLocaleDateString("en-GB", {
-                        day: "long",
-                        year: "long",
-                        month: "long",
-                    })}</Text>}
+                    <Text onPress={showDatePickerReturnTrip}>{returnTripDate == null ? 'Select Return Date' : returnTripDate.toLocaleDateString("en-GB")}</Text>}
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '90%', margin: 10, }}>
@@ -148,7 +139,7 @@ const SearchBar = () => {
 
 
 
-            <TouchableOpacity style={styles.button} onPress={() => console.log(From, To, 'this is from and to')}>
+            <TouchableOpacity style={styles.button} onPress={() => route.navigation.navigate('SearchResult', { From, To, flightData, isRoundTrip: OneWayOrRoundTripState, travellers: TravellersCount, returnDate: returnTripDate, departureDate: tripDate })}>
                 <Text style={{ color: Colors.textColorWhite, fontSize: 18, fontWeight: 'bold', }}>
                     Search
                 </Text>

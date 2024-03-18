@@ -16,6 +16,7 @@ import {
 import Homepage from './src/screens/Homepage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SearchResult from './src/components/SearchResult';
 
 
 const App: () => Node = () => {
@@ -42,6 +43,7 @@ const App: () => Node = () => {
           component={Homepage}
         />
         <Stack.Screen name="Profile" component={Homepage} />
+        <Stack.Screen name="SearchResult" component={SearchResult} />
       </Stack.Navigator>
     </NavigationContainer>
   );
