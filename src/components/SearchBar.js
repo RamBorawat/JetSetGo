@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-import Colors from '../colors';
+import Colors from '../standards/colors';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const TextInputFlight = ({ text, arg, val }) => <TextInput
@@ -140,7 +140,13 @@ const SearchBar = ({ route, flightData }) => {
 
 
 
-            <TouchableOpacity style={styles.button} onPress={() => route.navigation.navigate('SearchResult', { From, To, flightData, isRoundTrip: OneWayOrRoundTripState, travellers: TravellersCount, returnDate: returnTripDate, departureDate: tripDate })}>
+            <TouchableOpacity style={styles.button} onPress={() => {
+                if (From == '' || To == '') {
+                    alert('Please enter origin and destination')
+                    return
+                }
+                route.navigation.navigate('SearchResult', { From, To, flightData, isRoundTrip: OneWayOrRoundTripState, travellers: TravellersCount, returnDate: returnTripDate, departureDate: tripDate })
+            }}>
                 <Text style={{ color: Colors.textColorWhite, fontSize: 18, fontWeight: 'bold', }}>
                     Search
                 </Text>

@@ -17,6 +17,8 @@ import Homepage from './src/screens/Homepage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SearchResult from './src/components/SearchResult';
+import FlightDetails from './src/screens/FlightDetails';
+import ConfirmationScreen from './src/screens/ConfirmationScreen';
 
 
 const App: () => Node = () => {
@@ -44,6 +46,8 @@ const App: () => Node = () => {
         />
         <Stack.Screen name="Profile" component={Homepage} />
         <Stack.Screen name="SearchResult" component={SearchResult} />
+        <Stack.Screen name="FlightDetails" component={FlightDetails} />
+        <Stack.Screen name="ConfirmationScreen" component={ConfirmationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

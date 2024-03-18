@@ -1,22 +1,25 @@
 import React from 'react';
-import { View, StyleSheet, Text, } from 'react-native';
-import Colors from '../colors';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Colors from '../standards/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchResultCard = ({ flight }) => {
+    const navigation = useNavigation();
+
     return (
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('FlightDetails', { flightDetails: flight, route: navigation })}>
             <Text style={styles.seatsStyle}>{flight.seatsAvailable} seats left</Text>
             <Text style={styles.airline}>{flight.airline}</Text>
             <View style={{ width: '60%' }}>
                 <View>
-                    <Text style={styles.time}>{new Date(flight.departureTime).toLocaleTimeString('en-US')}<Text> - </Text>{new Date(flight.arrivalTime).toLocaleTimeString('en-US')}</Text>
+                    <Text style={styles.time}>{new Date(flight.departureTime).getHours() == 0 ? '00' : new Date(flight.departureTime).getHours()}:{new Date(flight.departureTime).getMinutes() == 0 ? '00' : new Date(flight.departureTime).getMinutes()}<Text> - </Text>{new Date(flight.arrivalTime).getHours() == 0 ? '00' : new Date(flight.arrivalTime).getHours()}:{new Date(flight.arrivalTime).getMinutes() == 0 ? '00' : new Date(flight.arrivalTime).getMinutes()}</Text>
                 </View>
                 <View>
                     <Text style={styles.duration}>{flight.duration}</Text>
                 </View>
             </View>
             <Text style={styles.price}><Text>{'\u20B9'}</Text>{flight.price}</Text>
-        </View>
+        </TouchableOpacity>
     )
 
 }
