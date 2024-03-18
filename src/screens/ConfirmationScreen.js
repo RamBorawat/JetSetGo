@@ -64,7 +64,6 @@ const ConfirmationScreen = ({ route }) => {
                     <Text style={{ color: Colors.textColorBlack, fontSize: 16, }}>Email : {Email}</Text>
                     <Text style={{ color: Colors.textColorBlack, fontSize: 16, }}>Mobile Number : {Mobile}</Text>
 
-
                 </View>
 
                 <View style={{ width: '100%', backgroundColor: Colors.textColorWhite, borderWidth: 1, borderRadius: 10, padding: 10, marginBottom: 10 }} >
