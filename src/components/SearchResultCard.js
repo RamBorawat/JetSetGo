@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, StyleSheet, Text, } from 'react-native';
-import Colors from '../colors';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Colors from '../standards/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchResultCard = ({ flight }) => {
+    console.log('route frmom flatlost')
+    const navigation = useNavigation();
+
     return (
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {
+            navigation.navigate('FlightDetails', { flightDetails: flight, route: navigation })
+            console.log(flight)
+        }}>
             <Text style={styles.seatsStyle}>{flight.seatsAvailable} seats left</Text>
             <Text style={styles.airline}>{flight.airline}</Text>
             <View style={{ width: '60%' }}>
@@ -16,7 +23,7 @@ const SearchResultCard = ({ flight }) => {
                 </View>
             </View>
             <Text style={styles.price}><Text>{'\u20B9'}</Text>{flight.price}</Text>
-        </View>
+        </TouchableOpacity>
     )
 
 }

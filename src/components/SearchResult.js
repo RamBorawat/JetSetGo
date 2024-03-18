@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity, Modal, Pressable, Alert } from 'react-native';
-import Colors from '../colors';
+import Colors from '../standards/colors';
 import SearchResultCard from './SearchResultCard';
 
 const NoDataAvailable = () => <Text style={{ width: '90%', height: '100%', textAlign: 'center', alignSelf: 'center', fontSize: 21, color: Colors.textColorBlack }}>There are no Flights available on this day either you can try changing the date or to see all available flights you can remove filter</Text>
