@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import FlightCard from '../components/FlightCard';
 
@@ -16,10 +16,10 @@ const Homepage = (route) => {
             .finally(() => setLoading(false));
     }, []);
     return (
-        <View style={{ height: '100%' }}>
+        <ScrollView style={{ height: '100%' }}>
             <SearchBar route={route} flightData={Data} />
-            <FlightCard />
-        </View>
+            {Data && <FlightCard route={route} flightData={Data} />}
+        </ScrollView >
     );
 }
 

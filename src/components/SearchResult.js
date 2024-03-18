@@ -42,10 +42,7 @@ const SearchResult = ({ route }) => {
                 animationType="slide"
                 transparent={true}
                 visible={modalVisibleFilter}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisibleFilter(!modalVisibleFilter);
-                }}>
+                onRequestClose={() => setModalVisibleFilter(!modalVisibleFilter)}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View>
@@ -95,10 +92,7 @@ const SearchResult = ({ route }) => {
                 animationType="slide"
                 transparent={true}
                 visible={modalVisibleSort}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisibleSort(!modalVisibleSort);
-                }}>
+                onRequestClose={() => setModalVisibleSort(!modalVisibleSort)}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <Text onPress={() => {
